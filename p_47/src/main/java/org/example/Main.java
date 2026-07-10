@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main {
     static void main() {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Wise_sayings> wise_sayings = new ArrayList<>();
+        ArrayList<Quote> quotes = new ArrayList<>();
 
 
         // 끝나면 다시 돌아와야해서 while문으로 시작
@@ -31,8 +31,8 @@ public class Main {
                     String wise_saying = sc.nextLine();
                     System.out.print("작가 : ");
                     String author = sc.nextLine();
-                    wise_sayings.add(new Wise_sayings(wise_saying, author));
-                    System.out.println("현재 " + wise_sayings.size() + "개의 명언이 등록되었습니다.");
+                    quotes.add(new Quote(wise_saying, author));
+                    System.out.println("현재 " + quotes.size() + "개의 명언이 등록되었습니다.");
                     break;
 
                 case "종료":
@@ -42,17 +42,17 @@ public class Main {
                 case "목록":
                     System.out.println("번호 / 작가 / 명언");
                     System.out.println("---------------------");
-                    for(Wise_sayings ws : wise_sayings){
-                        System.out.println(ws.id + " / " + ws.wise_sayings + " / " + ws.author);
+                    for(Quote ws : quotes){
+                        System.out.println(ws.id + " / " + ws.quote + " / " + ws.author);
                     }
                     break;
 
                 case "삭제":
 
                     id = Integer.parseInt(parts[1]);
-                    for(int i = 0; i < wise_sayings.size(); i++){
-                        if (wise_sayings.get(i).id == id){
-                            wise_sayings.remove(i);
+                    for(int i = 0; i < quotes.size(); i++){
+                        if (quotes.get(i).id == id){
+                            quotes.remove(i);
                             found = true;
                             System.out.println(id + "번째 명언이 삭제되었습니다.");
                             break;
@@ -65,15 +65,15 @@ public class Main {
 
                 case "수정":
                     id = Integer.parseInt(parts[1]);
-                    for(int i = 0; i < wise_sayings.size(); i++){
-                        if(wise_sayings.get(i).id == id){
+                    for(int i = 0; i < quotes.size(); i++){
+                        if(quotes.get(i).id == id){
                             System.out.print("새 명언 : ");
                             String newSaying = sc.nextLine();
                             System.out.print("새 작가 : ");
                             String newAuthor = sc.nextLine();
 
-                            wise_sayings.get(i).wise_sayings = newSaying;
-                            wise_sayings.get(i).author = newAuthor;
+                            quotes.get(i).quote = newSaying;
+                            quotes.get(i).author = newAuthor;
 
                             found = true;
                             System.out.println(id + "번 명언이 수정되었습니다.");

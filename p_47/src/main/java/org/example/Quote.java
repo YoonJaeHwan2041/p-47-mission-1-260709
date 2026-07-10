@@ -1,16 +1,16 @@
 package org.example;
 
 
-public class Wise_sayings {
+public class Quote {
     static int nextId = 1;
     int id;
-    String wise_sayings;
+    String quote;
     String author;
 
-    Wise_sayings(String wise_sayings, String author){
+    Quote(String quote, String author){
         this.id = nextId;
         nextId++;
-        this.wise_sayings = wise_sayings;
+        this.quote = quote;
         this.author = author;
     }
 }

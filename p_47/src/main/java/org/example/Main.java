@@ -13,7 +13,6 @@ public class Main {
         // 끝나면 다시 돌아와야해서 while문으로 시작
         while (true) {
             int id = 0;
-            boolean found = false;
             System.out.println("== 명언 앱 ==");
             System.out.print("명령) ");
             String commend = sc.nextLine();
@@ -32,8 +31,8 @@ public class Main {
                     String quote = sc.nextLine();
                     System.out.print("작가 : ");
                     String author = sc.nextLine();
-                    qs.add(quote, author);
-                    System.out.println("현재 " + quotes.size() + "개의 명언이 등록되었습니다.");
+                    int count = qs.add(quote, author);
+                    System.out.println("현재 " + count + "개의 명언이 등록되었습니다.");
                     break;
 
                 case "종료":

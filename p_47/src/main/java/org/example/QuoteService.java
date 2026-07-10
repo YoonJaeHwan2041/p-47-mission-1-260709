@@ -9,8 +9,9 @@ public class QuoteService {
     Scanner sc = new Scanner(System.in);
     ArrayList<Quote> quotes = new ArrayList<>();
 
-    void add(String quote, String author){
+    int add(String quote, String author){
         quotes.add(new Quote(quote, author));
+        return quotes.size();
     }
 
     ArrayList<Quote> getList() {

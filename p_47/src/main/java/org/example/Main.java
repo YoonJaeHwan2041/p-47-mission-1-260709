@@ -7,6 +7,7 @@ public class Main {
     static void main() {
         Scanner sc = new Scanner(System.in);
         ArrayList<Quote> quotes = new ArrayList<>();
+        QuoteService qs = new QuoteService();
 
 
         // 끝나면 다시 돌아와야해서 while문으로 시작
@@ -28,10 +29,10 @@ public class Main {
             switch (commend) {
                 case "등록":
                     System.out.print("명언 : ");
-                    String wise_saying = sc.nextLine();
+                    String quote = sc.nextLine();
                     System.out.print("작가 : ");
                     String author = sc.nextLine();
-                    quotes.add(new Quote(wise_saying, author));
+                    qs.add(quote, author);
                     System.out.println("현재 " + quotes.size() + "개의 명언이 등록되었습니다.");
                     break;
 
@@ -40,28 +41,22 @@ public class Main {
                     return;
 
                 case "목록":
+                    ArrayList<Quote> list = qs.getList();
                     System.out.println("번호 / 작가 / 명언");
                     System.out.println("---------------------");
-                    for(Quote ws : quotes){
+                    for(Quote ws : list){
                         System.out.println(ws.id + " / " + ws.quote + " / " + ws.author);
                     }
                     break;
 
                 case "삭제":
-
                     id = Integer.parseInt(parts[1]);
-                    for(int i = 0; i < quotes.size(); i++){
-                        if (quotes.get(i).id == id){
-                            quotes.remove(i);
-                            found = true;
-                            System.out.println(id + "번째 명언이 삭제되었습니다.");
-                            break;
-                        }
+                    if(qs.delete(id)) {
+                        System.out.println(id + "번 명언이 삭제 되었습니다.");
+                    }else {
+                        System.out.println(id + "번 명언을 찾지 못했습니다.");
                     }
-                    if(found == false) {
-                        System.out.println(id + "번의 명언을 찾지 못했습니다.");
-                    }
-                    break;
+
 
                 case "수정":
                     id = Integer.parseInt(parts[1]);

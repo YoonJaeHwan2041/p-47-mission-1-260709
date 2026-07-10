@@ -6,13 +6,13 @@ import java.util.Scanner;
 public class Main {
     static void main() {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Quote> quotes = new ArrayList<>();
         QuoteService qs = new QuoteService();
 
 
         // 끝나면 다시 돌아와야해서 while문으로 시작
         while (true) {
             int id = 0;
+            int count = 0;
             System.out.println("== 명언 앱 ==");
             System.out.print("명령) ");
             String commend = sc.nextLine();
@@ -31,7 +31,7 @@ public class Main {
                     String quote = sc.nextLine();
                     System.out.print("작가 : ");
                     String author = sc.nextLine();
-                    int count = qs.add(quote, author);
+                    count = qs.add(quote, author);
                     System.out.println("현재 " + count + "개의 명언이 등록되었습니다.");
                     break;
 
@@ -52,32 +52,29 @@ public class Main {
                     id = Integer.parseInt(parts[1]);
                     if(qs.delete(id)) {
                         System.out.println(id + "번 명언이 삭제 되었습니다.");
+                        break;
                     }else {
                         System.out.println(id + "번 명언을 찾지 못했습니다.");
+                        break;
                     }
 
 
                 case "수정":
                     id = Integer.parseInt(parts[1]);
-                    for(int i = 0; i < quotes.size(); i++){
-                        if(quotes.get(i).id == id){
-                            System.out.print("새 명언 : ");
-                            String newSaying = sc.nextLine();
-                            System.out.print("새 작가 : ");
-                            String newAuthor = sc.nextLine();
+                    Quote target = qs.findById(id);
+                    if(target != null){
+                        System.out.print("새 명언 : ");
+                        String newQuote = sc.nextLine();
+                        System.out.print("새 작가 : ");
+                        String newAuthor = sc.nextLine();
 
-                            quotes.get(i).quote = newSaying;
-                            quotes.get(i).author = newAuthor;
-
-                            found = true;
-                            System.out.println(id + "번 명언이 수정되었습니다.");
-                            break;
-                        }
-                    }
-                    if(found == false){
+                        qs.update(newQuote, newAuthor, target.id);
+                        System.out.println(target.id + "번의 명언이 수정되었습니다.");
+                        break;
+                    }else{
                         System.out.println(id + "번의 명언을 찾지 못했습니다.");
+                        break;
                     }
-                    break;
 
                     //잘못 입력했을 때를의 오류를 잡기 위함
                 default:

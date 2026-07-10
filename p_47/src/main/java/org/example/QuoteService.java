@@ -9,15 +9,18 @@ public class QuoteService {
     Scanner sc = new Scanner(System.in);
     ArrayList<Quote> quotes = new ArrayList<>();
 
+    // 등록
     int add(String quote, String author){
         quotes.add(new Quote(quote, author));
         return quotes.size();
     }
 
+    //목록
     ArrayList<Quote> getList() {
         return quotes;
     }
 
+    //삭제
     boolean delete(int id) {
         for(int i = 0; i < quotes.size(); i++){
             if (quotes.get(i).id == id){
@@ -26,5 +29,21 @@ public class QuoteService {
             }
         }
         return false;
+    }
+
+    //해당 id 찾기
+    Quote findById(int id) {
+        for (Quote q : quotes) {
+            if (q.id == id) {
+                return q; // 찾으면 그 객체를 바로 리턴
+            }
+        }
+        return null; // 못 찾으면 null
+    }
+
+    //수정
+    void update(String newQuotes, String newAuthor, int target){
+        quotes.get(target).quote = newQuotes;
+        quotes.get(target).author = newAuthor;
     }
 }

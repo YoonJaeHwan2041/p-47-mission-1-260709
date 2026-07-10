@@ -13,6 +13,7 @@ public class Main {
         while (true) {
             int id = 0;
             int count = 0;
+            Quote target;
             System.out.println("== 명언 앱 ==");
             System.out.print("명령) ");
             String commend = sc.nextLine();
@@ -50,7 +51,10 @@ public class Main {
 
                 case "삭제":
                     id = Integer.parseInt(parts[1]);
-                    if(qs.delete(id)) {
+                    target = qs.findById(id);
+
+                    if(qs.findById(id) != null) {
+                        qs.delete(target);
                         System.out.println(id + "번 명언이 삭제 되었습니다.");
                         break;
                     }else {
@@ -61,7 +65,7 @@ public class Main {
 
                 case "수정":
                     id = Integer.parseInt(parts[1]);
-                    Quote target = qs.findById(id);
+                    target = qs.findById(id);
                     if(target != null){
                         System.out.print("새 명언 : ");
                         String newQuote = sc.nextLine();

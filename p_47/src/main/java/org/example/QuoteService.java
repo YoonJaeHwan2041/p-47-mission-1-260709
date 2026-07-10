@@ -21,14 +21,8 @@ public class QuoteService {
     }
 
     //삭제
-    boolean delete(int id) {
-        for(int i = 0; i < quotes.size(); i++){
-            if (quotes.get(i).id == id){
-                quotes.remove(i);
-                return true;
-            }
-        }
-        return false;
+    void delete(Quote q) {
+        quotes.remove(q.id);
     }
 
     //해당 id 찾기

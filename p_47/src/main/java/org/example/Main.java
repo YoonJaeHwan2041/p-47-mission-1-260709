@@ -7,18 +7,21 @@ public class Main {
     static void main() {
         Scanner sc = new Scanner(System.in);
         ArrayList<Wise_sayings> wise_sayings = new ArrayList<>();
-        boolean found = false;
+
 
         // 끝나면 다시 돌아와야해서 while문으로 시작
         while (true) {
             int id = 0;
+            boolean found = false;
             System.out.println("== 명언 앱 ==");
             System.out.print("명령) ");
             String commend = sc.nextLine();
 
             //삭제 및 수정 입력시 commend 입력값과 id 값을 분리
             String[] parts = commend.split("\\?id=");
-            commend = parts[0];
+            if (parts.length > 1) {
+                commend = parts[0];
+            }
 
 
             //각 명령어마다 실행시키기 쉽도록 switch로 사
@@ -55,17 +58,37 @@ public class Main {
                             break;
                         }
                     }
-                    System.out.println(id + "번의 명언을 찾지 못했습니다.");
+                    if(found == false) {
+                        System.out.println(id + "번의 명언을 찾지 못했습니다.");
+                    }
                     break;
 
                 case "수정":
                     id = Integer.parseInt(parts[1]);
                     for(int i = 0; i < wise_sayings.size(); i++){
                         if(wise_sayings.get(i).id == id){
+                            System.out.print("새 명언 : ");
+                            String newSaying = sc.nextLine();
+                            System.out.print("새 작가 : ");
+                            String newAuthor = sc.nextLine();
 
+                            wise_sayings.get(i).wise_sayings = newSaying;
+                            wise_sayings.get(i).author = newAuthor;
+
+                            found = true;
+                            System.out.println(id + "번 명언이 수정되었습니다.");
+                            break;
                         }
                     }
+                    if(found == false){
+                        System.out.println(id + "번의 명언을 찾지 못했습니다.");
+                    }
+                    break;
 
+                    //잘못 입력했을 때를의 오류를 잡기 위함
+                default:
+                    System.out.println("잘못된 명령어입니다.");
+                    break;
             }
         }
 

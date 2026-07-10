@@ -42,7 +42,7 @@ public class Main {
 
                 case "목록":
                     ArrayList<Quote> list = qs.getList();
-                    System.out.println("번호 / 작가 / 명언");
+                    System.out.println("번호 / 명언 / 작가");
                     System.out.println("---------------------");
                     for(Quote ws : list){
                         System.out.println(ws.id + " / " + ws.quote + " / " + ws.author);
@@ -51,10 +51,7 @@ public class Main {
 
                 case "삭제":
                     id = Integer.parseInt(parts[1]);
-                    target = qs.findById(id);
-
-                    if(qs.findById(id) != null) {
-                        qs.delete(target);
+                    if(qs.delete(id)) {
                         System.out.println(id + "번 명언이 삭제 되었습니다.");
                         break;
                     }else {
@@ -72,7 +69,7 @@ public class Main {
                         System.out.print("새 작가 : ");
                         String newAuthor = sc.nextLine();
 
-                        qs.update(newQuote, newAuthor, target.id);
+                        qs.update(newQuote, newAuthor, target);
                         System.out.println(target.id + "번의 명언이 수정되었습니다.");
                         break;
                     }else{

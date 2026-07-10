@@ -21,11 +21,25 @@ public class QuoteService {
     }
 
     //삭제
-    void delete(Quote q) {
-        quotes.remove(q.id);
+    boolean delete(int id) {
+        Quote target = findById(id); // 헬퍼 재사용
+        if (target == null){
+            return false;
+        }else{
+            quotes.remove(target);
+            return true;
+        }
     }
 
-    //해당 id 찾기
+
+
+    //수정
+    void update(String newQuotes, String newAuthor, Quote target){
+        target.quote = newQuotes;
+        target.author = newAuthor;
+    }
+
+    //중복된 코드로 인한 헬퍼 메서드
     Quote findById(int id) {
         for (Quote q : quotes) {
             if (q.id == id) {
@@ -33,11 +47,5 @@ public class QuoteService {
             }
         }
         return null; // 못 찾으면 null
-    }
-
-    //수정
-    void update(String newQuotes, String newAuthor, int target){
-        quotes.get(target).quote = newQuotes;
-        quotes.get(target).author = newAuthor;
     }
 }
